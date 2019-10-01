@@ -223,13 +223,21 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     System.out.println("The yMovement is: "+yMovement);
     System.out.println("The landing coordinates are: "+"( "+landingX+","+landingY+")");
     System.out.println("----------------------------------------");
-    if(pieceName.equals("BlackQueen")){
+    
+	if (pieceName.contains("Knight")){
+		if(((xMovement == 1) && (yMovement == 2)) || ((xMovement == 2 ) && (yMovement == 1))){
+			validMove = true;
+			
+		}
+	}	
+	else if(pieceName.equals("King")){
+      validMove = true;
+    }
+		
+	else if(pieceName.equals("BlackQueen")){
       validMove = true;
     }
 	
-	if (pieceName.contains("Knight")){
-		validMove = true;
-	}
       else if (pieceName.equals("BlackPawn")){
         if(startY == 6){ // this is the first move
           if(((yMovement == 1) || (yMovement == 2)) && (startY > landingY) && (xMovement == 0)){ // can move 1 or 2 squares and start is greater than landing so there is no coming back
