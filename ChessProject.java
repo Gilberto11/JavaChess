@@ -228,7 +228,20 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 		if(((xMovement == 1) && (yMovement == 2)) || ((xMovement == 2 ) && (yMovement == 1))){ //define L movement
 			if(!piecePresent(e.getX(), e.getY())){ // if there is not a piece present then the move is valid
 				validMove = true;
-			}		
+			}
+			else{
+				if(pieceName.contains("White")){
+					if(checkWhiteOpponent(e.getX(), e.getY())){
+						validMove = true;
+					}
+				}
+					else{
+						if(checkBlackOpponent(e.getX(), e.getY())){
+							validMove = true;
+						}
+					}
+			}			
+					
 		}
 	}	
 	else if(pieceName.equals("King")){
