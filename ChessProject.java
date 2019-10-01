@@ -226,6 +226,10 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     if(pieceName.equals("BlackQueen")){
       validMove = true;
     }
+	
+	if (pieceName.contains("Knight")){
+		validMove = true;
+	}
       else if (pieceName.equals("BlackPawn")){
         if(startY == 6){ // this is the first move
           if(((yMovement == 1) || (yMovement == 2)) && (startY > landingY) && (xMovement == 0)){ // can move 1 or 2 squares and start is greater than landing so there is no coming back
