@@ -223,8 +223,21 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     System.out.println("The yMovement is: "+yMovement);
     System.out.println("The landing coordinates are: "+"( "+landingX+","+landingY+")");
     System.out.println("----------------------------------------");
+
+
+    if (pieceName.equals("BlackQueen")){
+
+    	Boolean InTheWay = false;
+
+    	if(((landingX < 0) || (landingX > 7 )) || ((landingY < 0) || (landingY > 7))){
+    		validMove = false;
+    	}else {
+    		validMove = true;
+    	}
+      
+    }
     
-	if (pieceName.contains("Knight")){
+	else if (pieceName.contains("Knight")){
 		if(((xMovement == 1) && (yMovement == 2)) || ((xMovement == 2 ) && (yMovement == 1))){ //define L movement
 			if(!piecePresent(e.getX(), e.getY())){ // if there is not a piece present then the move is valid
 				validMove = true;
@@ -245,10 +258,6 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 		}
 	}	
 	else if(pieceName.equals("King")){
-      validMove = true;
-    }
-		
-	else if(pieceName.equals("BlackQueen")){
       validMove = true;
     }
 	
