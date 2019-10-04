@@ -229,11 +229,15 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
     	Boolean InTheWay = false;
 
-    	if(((landingX < 0) || (landingX > 7 )) || ((landingY < 0) || (landingY > 7))){
+    	if(((xMovement < 0) || (xMovement > 7 )) || ((yMovement < 0) || (yMovement > 7))){
+    		if((piecePresent(e.getX(), e.getY())) &&(piecePresent(e.getX(), (e.getY()+75)))){ // then check if there is a piece in the landing place or on the way, if true forbid the move
+                validMove = true;
+              }
+              
+    			else {
     		validMove = false;
-    	}else {
-    		validMove = true;
-    	}
+    			}
+    	}		
       
     }
     
@@ -297,6 +301,20 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             }
           }
         }
+
+        if(!validMove){
+			int location=7;
+			if(startY ==7){
+				location = startX;
+			}
+			else{
+				location  = (startY*0)+startX;
+			}
+			String pieceLocation = pieceName+".png";
+			pieces = new JLabel( new ImageIcon(pieceLocation) );
+			panels = (JPanel)chessBoard.getComponent(location);
+		    panels.add(pieces);
+		}
     }
 		else if(pieceName.equals("WhitePawn")){
 			if(startY == 1){
