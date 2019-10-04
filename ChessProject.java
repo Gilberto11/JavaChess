@@ -229,13 +229,13 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
     	Boolean InTheWay = false;
 
-    	if(((xMovement < 0) || (xMovement > 7 )) || ((yMovement < 0) || (yMovement > 7))){
-    		if((piecePresent(e.getX(), e.getY())) &&(piecePresent(e.getX(), (e.getY()+75)))){ // then check if there is a piece in the landing place or on the way, if true forbid the move
-                validMove = true;
+    	if(((landingX < 0) || (landingX > 7 )) || ((landingY < 0) || (landingY > 7))){
+    		if((!piecePresent(e.getX(), e.getY())) &&(!piecePresent(e.getX(), (e.getY()+75)))){ // then check if there is a piece in the landing place or on the way, if true forbid the move
+                validMove = false;
               }
               
     			else {
-    		validMove = false;
+    		validMove = true;
     			}
     	}		
       
@@ -301,10 +301,9 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             }
           }
         }
-
         if(!validMove){
-			int location=7;
-			if(startY ==7){
+			int location=0;
+			if(startY ==0){
 				location = startX;
 			}
 			else{
@@ -314,35 +313,6 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 			pieces = new JLabel( new ImageIcon(pieceLocation) );
 			panels = (JPanel)chessBoard.getComponent(location);
 		    panels.add(pieces);
-		}else{
-			if(success){
-				int location = 56 + (e.getX()/75);
-				if (c instanceof JLabel){
-	         Container parent = c.getParent();
-	         parent.remove(7);
-					 pieces = new JLabel( new ImageIcon("BlackQueen.png") );
-					 parent = (JPanel)chessBoard.getComponent(location);
-			    	parent.add(pieces);
-				}
-				else{
-					Container parent = (Container)c;
-	        pieces = new JLabel( new ImageIcon("BlackQueen.png") );
-					parent = (JPanel)chessBoard.getComponent(location);
-			   	parent.add(pieces);
-				}
-			}
-			else{
-				if (c instanceof JLabel){
-	       Container parent = c.getParent();
-	       parent.remove();
-	       parent.add( chessPiece );
-	      }
-	        else {
-	        Container parent = (Container)c;
-	        parent.add( chessPiece );
-	        }
-	    		chessPiece.setVisible(true);
-			}
 		}
     }
 		else if(pieceName.equals("WhitePawn")){
