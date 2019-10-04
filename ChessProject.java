@@ -224,21 +224,81 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     System.out.println("The landing coordinates are: "+"( "+landingX+","+landingY+")");
     System.out.println("----------------------------------------");
 
+    if (pieceName.contains("Bishup")){
+    	Boolean inTheWay = false;
+    	int distance = Math.abs(startX-landingX);
+    	if(((landingX < 0) || (landingX > 7)) || ((landingY <0) || (landingY > 7))){
+    		validMove = false;
+    	}
+    	else{
+    		validMove =true;
+    		if(Math.abs(startX-landingX) == Math.abs(startY-landingY)){
+    			if((startX-landingX < 0) && (startY-landingY < 0)){
+    				for(int i=0; i< distance; i++){
+    					if(piecePresent((initialX + (i*75)), (initialY + (i*75)))){
+    						inTheWay = true;
 
-    if (pieceName.equals("BlackQueen")){
-
-    	Boolean InTheWay = false;
-
-    	if(((landingX < 0) || (landingX > 7 )) || ((landingY < 0) || (landingY > 7))){
-    		if((!piecePresent(e.getX(), e.getY())) &&(!piecePresent(e.getX(), (e.getY()+75)))){ // then check if there is a piece in the landing place or on the way, if true forbid the move
-                validMove = false;
-              }
-              
-    			else {
-    		validMove = true;
+    					}
+    				}
     			}
-    	}		
-      
+    			else if ((startX-landingX < 0) && (startY-landingY > 0)){
+    				for (int i=0; i< distance; i++){
+    					if(piecePresent((initialX + (i*75)), (initialY-(i*75)))){
+    						inTheWay = true;
+    					}
+    				}
+    			}
+    			else if((startX-landingX > 0) && (startY-landingY > 0)){
+    				for (int i=0; i < distance; i++){
+    					if(piecePresent((initialX-(i*75)), (initialY-(i*75)))){
+    						inTheWay = true;
+    					}
+    				}
+    			}
+    			else if((startX-landingX > 0) && (startY-landingY < 0)){
+    				for (int i=0; i< distance; i++){
+    					if(piecePresent((initialX - (i*75)), (initialY+(i*75)))){
+    						inTheWay = true;
+    					}
+    				}
+    			}
+    			if(inTheWay){
+    				validMove = false;
+    			}
+    			else{
+    				if(piecePresent(e.getX(), (e.getY()))){
+    					if(pieceName.contains("White")){
+    						if(checkWhiteOpponent(e.getX(), e.getY())){
+    							validMove = true;
+    						}else {
+    							validMove = false;
+    						}
+    					}
+    					else {
+    						if(checkBlackOpponent(e.getX(), e.getY())){
+    							validMove = true;
+    						}
+    						else{
+    							validMove = false;
+    						}
+    					}
+    				}
+    				else{
+    					validMove = true;
+    				}
+    			}
+    		}
+    		else{
+    			validMove = false;
+    		}
+    	}
+    }
+
+   else if (pieceName.equals("WhiteQueen")){
+    	validMove = true;
+    }
+    else if (pieceName.equals("BlackQueen")){		
+      	validMove = true;
     }
     
 	else if (pieceName.contains("Knight")){
