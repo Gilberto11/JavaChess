@@ -224,7 +224,98 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     System.out.println("The landing coordinates are: "+"( "+landingX+","+landingY+")");
     System.out.println("----------------------------------------");
 
-    if (pieceName.contains("Bishup")){
+    if(pieceName.contains("Rook")){
+    	Boolean inTheWay = false;
+    	if(((landingX < 0) || (landingX > 7)) || ((landingY < 0) || (landingY > 7))){
+			validMove = false;
+		}
+		else{
+			if(((Math.abs(startX-landingX)!=0) && (Math.abs(startY-landingY) == 0)) || ((Math.abs(startX-landingX) == 0) && (Math.abs(landingY-startY) !=0))){
+				if(Math.abs(startX-landingX)!=0){
+					int xMovementR = Math.abs(startX-landingX);
+					if(startX - landingX >0){
+						for(int i=0; i < xMovementR; i++){
+							if(piecePresent(initialX-(i*75), e.getY())){
+								inTheWay = true;
+								break;
+							}
+							else{
+								inTheWay = false;
+							}
+						}
+					}
+					else{
+						for (int i=0; i < xMovementR; i++){
+							if(piecePresent(initialX+(i*75), e.getY())){
+								inTheWay = true;
+								break;
+							}
+							else {
+								inTheWay = false;
+							}
+						}
+					}
+				}
+				else{
+					int yMovementR = Math.abs(startY-landingY);
+					if (startY-landingY > 0){
+						for (int i=0; i < yMovementR; i++){
+							if(piecePresent(e.getX(), initialY-(i*75))){
+								inTheWay = true;
+								break;
+							}
+							else{
+								inTheWay = false;
+							}
+						}
+					}
+					else{
+						for(int i=0; i < yMovementR; i++){
+							if(piecePresent(e.getX(), initialY+(i*75))){
+								inTheWay = true;
+								break;
+							}
+						else{
+							inTheWay = false;
+						}
+					}
+				}
+			}
+			if(inTheWay){
+				validMove = false;
+			}
+			else{
+				if(piecePresent(e.getX(), (e.getY()))){
+					if(pieceName.contains("White")){
+						if(checkWhiteOpponent(e.getX(), e.getY())){
+							validMove = true;
+						}
+						else{
+							validMove = false;
+						}
+					}
+					else{
+						if(checkBlackOpponent(e.getX(), e.getY())){
+							validMove = true;
+						}
+						else{
+							validMove = false;
+						}
+					}
+				}
+				else{
+					validMove = true;
+				}
+			}
+
+			}
+			else{
+				validMove = false;
+
+			}
+		}
+	}
+    else if (pieceName.contains("Bishup")){
     	Boolean inTheWay = false;
     	int distance = Math.abs(startX-landingX);
     	if(((landingX < 0) || (landingX > 7)) || ((landingY <0) || (landingY > 7))){
