@@ -304,7 +304,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                                 validMove = true;
 
                                 if (getPieceName(e.getX(), e.getY()).contains("King")) {
-                                    winner = "Sorry, Better luck next time. The White AI has won the game!";
+                                    winner = "The White has won the game!";
                                 }
                             } else {
                                 validMove = false;
@@ -312,7 +312,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                         } else if (checkBlackOpponent(e.getX(), e.getY())) {
                             validMove = true;
                             if (getPieceName(e.getX(), e.getY()).contains("King")) {
-                                winner = "The Black Player has won the game!";
+                                winner = "Black has won the game!";
                             }
                         } else {
                             validMove = false;
@@ -366,7 +366,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                                 if (checkWhiteOpponent(e.getX(), e.getY())) {
                                     validMove = true;
                                     if (getPieceName(e.getX(), e.getY()).contains("King")) {
-                                        winner = "Sorry, Better luck next time. The White AI has won the game!";
+                                        winner = "Sorry, Better luck next time. The White has won the game!";
                                     }
                                 } else {
                                     validMove = false;
@@ -374,7 +374,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                             } else if (checkBlackOpponent(e.getX(), e.getY())) {
                                 validMove = true;
                                 if (getPieceName(e.getX(), e.getY()).contains("King")) {
-                                    winner = "The Black Player has won the game!";
+                                    winner = "Black has won the game!";
                                 }
                             } else {
                                 validMove = false;
@@ -401,26 +401,25 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
       	validMove = true;
     }
     
-	else if (pieceName.contains("Knight")){
-		if(((xMovement == 1) && (yMovement == 2)) || ((xMovement == 2 ) && (yMovement == 1))){ //define L movement
-			if(!piecePresent(e.getX(), e.getY())){ // if there is not a piece present then the move is valid
-				validMove = true;
-			}
-			else{
-				if(pieceName.contains("White")){
-					if(checkWhiteOpponent(e.getX(), e.getY())){
-						validMove = true;
-					}
-				}
-					else{
-						if(checkBlackOpponent(e.getX(), e.getY())){
-							validMove = true;
-						}
-					}
-			}			
-					
-		}
-	}	
+	else if (pieceName.contains("Knight")) {
+              if (((xMovement == 1) && (yMovement == 2)) || ((xMovement == 2) && (yMovement == 1))) {
+                    if (!piecePresent(e.getX(), e.getY())) {
+                        validMove = true;
+                    } else if (pieceName.contains("White")) {
+                        if (checkWhiteOpponent(e.getX(), e.getY())) {
+                            validMove = true;
+                            if (getPieceName(e.getX(), e.getY()).contains("King")) {
+                                winner = "The White has won the game!";
+                            }
+                        }
+                    } else if (checkBlackOpponent(e.getX(), e.getY())) {
+                        validMove = true;
+                        if (getPieceName(e.getX(), e.getY()).contains("King")) {
+                            winner = "The Black has won the game!";
+                        }
+                    }
+                }
+            }	
 	else if (pieceName.contains("King")) {
                 if ((xMovement == 0) && (yMovement == 0)) {
                     validMove = false;
