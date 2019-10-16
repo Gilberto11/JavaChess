@@ -632,68 +632,52 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                     }
                 }
             }
-		else if(pieceName.equals("WhitePawn")){
-			if(startY == 1){
-				if((startX == (e.getX()/75))&&((((e.getY()/75)-startY)==1)||((e.getY()/75)-startY)==2)){
-					if((((e.getY()/75)-startY)==2)){
-						if((!piecePresent(e.getX(), (e.getY())))&&(!piecePresent(e.getX(), (e.getY()+75)))){
-							validMove = true;
-						}
-						else{
-							validMove = false;
-						}
-					}
-					   else{
-						  if((!piecePresent(e.getX(), (e.getY())))){
-							validMove = true;
-						  }
-						   else{
-							validMove = false;
-						   }
-					  }
-				}
-				else{
-					validMove = false;
-				}
-			}
-			else{
-				int newY = e.getY()/75;
-				int newX = e.getX()/75;
-				if((startX-1 >=0)||(startX +1 <=7)){
-				 if((piecePresent(e.getX(), (e.getY())))&&((((newX == (startX+1)&&(startX+1<=7)))||((newX == (startX-1))&&(startX-1 >=0)))))
-					{
-						if(checkWhiteOpponent(e.getX(), e.getY())){
-							validMove = true;
-							if(startY == 6){
-								success = true;
-							}
-						}
-						else{
-							validMove = false;
-						}
-					}
-					else{
-						if(!piecePresent(e.getX(), (e.getY()))){
-							if((startX == (e.getX()/75))&&((e.getY()/75)-startY)==1){
-								if(startY == 6){
-									success = true;
-								}
-								validMove = true;
-							}
-							else{
-								validMove = false;
-							}
-						}
-						else{
-							validMove = false;
-						}
-					}
-				}
-				else{
-					validMove = false;
-				}
-			}
-		}
+            else if (pieceName.equals("WhitePawn")) {
+                if (startY == 1) {
+                    if (((xMovement == 0)) && ((yMovement == 1) || ((yMovement) == 2))) {
+                        if (yMovement == 2) {
+                            if ((!piecePresent(e.getX(), (e.getY()))) && (!piecePresent(e.getX(), (e.getY() - 75)))) {
+                                validMove = true;
+                            }
+                        } else if ((!piecePresent(e.getX(), (e.getY())))) {
+                            validMove = true;
+                        }
+                    } else if ((piecePresent(e.getX(), e.getY())) && (xMovement == yMovement) && (xMovement == 1) && (startY < landingY)) {
+                       if (checkWhiteOpponent(e.getX(), e.getY())) {
+                            validMove = true;
+                            if (startY == 6) {
+                                success = true;
+                            }
+                            if (getPieceName(e.getX(), e.getY()).contains("King")) {
+                                JOptionPane.showMessageDialog (null, "White has won the game");
+                                System.exit(0);
+                            }
+                        }
+                    }
+                }
+                else if ((startX - 1 >= 0) || (startX + 1 <= 7)) {
+                    if ((piecePresent(e.getX(), e.getY())) && (xMovement == yMovement) && (xMovement == 1)) {
+                        if (checkWhiteOpponent(e.getX(), e.getY())) {
+                            validMove = true;
+                            if (startY == 6) {
+                                success = true;
+                            }
+                            if (getPieceName(e.getX(), e.getY()).contains("King")) {
+                                JOptionPane.showMessageDialog (null, "White has won the game");
+                                System.exit(0);
+                            }
+                        }
+                    }
+                    else if (!piecePresent(e.getX(), (e.getY()))) {
+                        if (((xMovement == 0)) && ((e.getY() / 75) - startY) == 1) {
+                            if (startY == 6) {
+                                success = true;
+                            }
+                            validMove = true;
+                        }
+                    }
+                }
+            }
     if(!validMove){
 			int location = 0;
 			if(startY == 0){
