@@ -1,3 +1,5 @@
+/* The game always start from a white move, each colour can move only once! */
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -232,15 +234,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 		Boolean possible = false;
 
 		/*
-			The only piece that has been enabled to move is a White Pawn...but we should really have this is a separate
-			method somewhere...how would this work.
-
-			So a Pawn is able to move two squares forward one its first go but only one square after that.
-			The Pawn is the only piece that cannot move backwards in chess...so be careful when committing
-			a pawn forward. A Pawn is able to take any of the opponent’s pieces but they have to be one
-			square forward and one square over, i.e. in a diagonal direction from the Pawns original position.
-			If a Pawn makes it to the top of the other side, the Pawn can turn into any other piece, for
-			demonstration purposes the Pawn here turns into a Queen.
+/* The game always start from a white move, each colour can move only once! */
 		*/
     int landingX = (e.getX()/75);
     int landingY = (e.getY()/75);
