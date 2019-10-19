@@ -1,0 +1,7 @@
+Instructions done for my Chess Project, those were not part of the requirements, but I implemented as they are part of chess rules.
+
+1- Game always start from a White Move.
+2- The same colour can't move twice straight, must take turns.
+3- Defined boundaries so pieces doesn't fall off the board.
+4- The game displays message for the winning colour.
+5- Game closes if King is captured.
